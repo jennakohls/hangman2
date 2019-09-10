@@ -6,6 +6,7 @@ window.onload = function () {
 
   var categories;         // Array of topics
   var chosenCategory;     // Selected catagory
+  var getHint ;          // Word getHint
   var word ;              // Selected word
   var guess ;             // Geuss
   var geusses = [ ];      // Stored geusses
@@ -17,8 +18,11 @@ window.onload = function () {
   // Get elements
   var showLives = document.getElementById("mylives");
   var showCatagory = document.getElementById("scatagory");
-  var guessButton = document.getElementById("guess");
-  guessButton.click();
+  var getHint = document.getElementById("hint");
+  var showClue = document.getElementById("clue");
+
+  mode.innerHTML = "Mode: " + guessMode;
+
 
 
   // create alphabet ul
@@ -41,9 +45,9 @@ window.onload = function () {
   // Select Catagory
   var selectCat = function () {
     if (chosenCategory === categories[0]) {
-      catagoryName.innerHTML = "Category: Colors";
+      catagoryName.innerHTML = "Category: Premier League Football Teams";
     } else if (chosenCategory === categories[1]) {
-      catagoryName.innerHTML = "Category: US States";
+      catagoryName.innerHTML = "Category: Films";
     } else if (chosenCategory === categories[2]) {
       catagoryName.innerHTML = "Category: Cities";
     }
@@ -82,97 +86,13 @@ window.onload = function () {
         showLives.innerHTML = "You Win!";
       }
     }
+    mode.innerHTML = "Mode: " + guessMode;
   }
 
       // Animate man
   var animate = function () {
     var drawMe = lives ;
     drawArray[drawMe]();
-  }
-
-  var animate9 = function () {
-    drawArray[9]();
-  }
-
-  var animate8 = function () {
-    drawArray[9]();
-    drawArray[8]();
-  }
-
-  var animate7 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-  }
-
-  var animate6 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-  }
-
-  var animate5 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-  }
-
-  var animate4 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-    drawArray[4]();
-  }
-
-  var animate3 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-    drawArray[4]();
-    drawArray[3]();
-  }
-
-  var animate2 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-    drawArray[4]();
-    drawArray[3]();
-    drawArray[2]();
-  }
-
-  var animate1 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-    drawArray[4]();
-    drawArray[3]();
-    drawArray[2]();
-    drawArray[1]();
-  }
-
-  var animate0 = function () {
-    drawArray[9]();
-    drawArray[8]();
-    drawArray[7]();
-    drawArray[6]();
-    drawArray[5]();
-    drawArray[4]();
-    drawArray[3]();
-    drawArray[2]();
-    drawArray[1]();
-    drawArray[0]();
   }
 
 
@@ -237,7 +157,8 @@ window.onload = function () {
      draw (60, 70, 20, 100);
    };
 
-  drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1];
+  drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head,
+  frame4, frame3, frame2, frame1];
 
 
   // OnClick Function
@@ -253,66 +174,39 @@ window.onload = function () {
         }
       }
       var j = (word.indexOf(geuss));
-      if(guessMode){ //normal mode
-          if (j === -1) {
-            lives -= 1;
-            comments();
-            animate();
-          } else {
-            comments();
-          }
-      } else { //answer mode
-          if (j === -1) { //answer wrong
-              //currently works! draw full stickman and
-            lives = 0;
-            comments();
-            for (var i = 0; i < 10; i++){
-              lives = i;
+
+      if (guessMode){
+        //normal behaviour
+          if (j === -1) { //guess is wrong
+                lives -= 1;
+                comments();
+                animate();
+            } else {
+                comments();
+              }
+        } else {
+            if (j === -1) { //answer is wrong
+                lives = 0;
+                comments();
+                animate();
+            } else {
+              lives += 1;
+              comments();
               animate();
             }
-
-          } else {
-            lives += 1;
-            var currentLives = lives;
-            comments();
-            context.clearRect(0, 0, 400, 400);
-            if(currentLives == 0){ animate0();
-            } else if(currentLives == 1){ animate1();
-            } else if(currentLives == 2){ animate2();
-            } else if(currentLives == 3){ animate3();
-            } else if(currentLives == 4){ animate4();
-            } else if(currentLives == 5){ animate5();
-            } else if(currentLives == 6){ animate6();
-            } else if(currentLives == 7){ animate7();
-            } else if(currentLives == 8){ animate8();
-            } else if(currentLives == 9){ animate9();
-            }
-
           }
-      }
     }
+
   }
 
 
   // Play
   play = function () {
     categories = [
-        ["pink","purple","maroon","green","black","white","periwinkle","orange","yellow",
-        "magenta","mint","aquamarine","lavender","scarlet","cerulean","violet","indigo"],
-
-        ["alabama","alaska", "arizona", "arkansas", "california", "colorado",
-        "connecticut", "delaware", "florida", "georgia", "hawaii",
-        "idaho", "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana",
-        "maine", "maryland", "massachusetts", "michigan", "minnesota",
-        "mississippi", "missouri", "montana", "nebraska","nevada", "new hampshire",
-        "new jersey", "new mexico", "new york", "north carolina", "north dakota",
-        "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island",
-        "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont",
-        "virginia", "washington", "west virginia", "wisconsin", "wyoming"],
-
-        ["manchester", "milan", "madrid", "amsterdam", "prague","london",
-        "pittsburgh","atlanta","london","berlin","barcelona","athens","venice",
-        "budapest","copenhagen","stockholm"]
+        ["everton", "liverpool", "swansea", "chelsea",
+             "hull", "manchester-city", "newcastle-united"],
+        ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
+        ["manchester", "milan", "madrid", "amsterdam", "prague"]
     ];
 
     chosenCategory = categories[Math.floor(Math.random() * categories.length)];
@@ -333,28 +227,41 @@ window.onload = function () {
 
   play();
 
+  // Hint
+
+    hint.onclick = function() {
+
+      hints = [
+        ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club"],
+        ["Science-Fiction horror film", "1971 American action film", "Historical drama", "Anamated Fish", "Giant great white shark"],
+        ["Northern city in the UK", "Home of AC and Inter", "Spanish capital", "Netherlands capital", "Czech Republic capital"]
+    ];
+
+    var catagoryIndex = categories.indexOf(chosenCategory);
+    var hintIndex = chosenCategory.indexOf(word);
+    showClue.innerHTML = "Clue: - " +  hints [catagoryIndex][hintIndex];
+  };
 
    // Reset
 
   document.getElementById('reset').onclick = function() {
     correct.parentNode.removeChild(correct);
     letters.parentNode.removeChild(letters);
+    showClue.innerHTML = "";
     context.clearRect(0, 0, 400, 400);
     play();
   }
 
-    document.getElementById('guess').onclick = function() {
-    guessMode = true;
-  }
+  // ;
 
-      document.getElementById('answer').onclick = function() {
-    guessMode = false;
-  }
+  //   document.getElementById('guess').onclick = function() {
+  //     guessMode = true;
+  //     comments();
+  // };
 
-  $('button').on('click', function(){
-    $('button').removeClass('selected');
-    $(this).addClass('selected');
-});
-
-
+  //     document.getElementById('answer').onclick = function() {
+  //     guessMode = false;
+  //     mode.innerHTML = "Mode: " + false;
+  //     comments();
+  // };
 }
