@@ -22,3 +22,4 @@ More interestingly, however, is if a player is not sure of the answer and does n
 enough lives to keep guessing randomly, they may bet on their confidence and attempt
 to win lives back.
 
+This game is a modification of this sample hangman game: https://codepen.io/cathydutton/pen/ldazc
