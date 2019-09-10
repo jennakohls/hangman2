@@ -10,7 +10,7 @@ becomes obvious. The game is, then, no longer about attempting to figure out
 a clue or use logical reasoning to determine likely letters, but having good luck
 when picking random letters.
 
-High-Stakes Hangman seeks to rememdy this frustration by bringing an incentive
+High-Stakes Hangman seeks to remedy this frustration by bringing an incentive
 for critical thinking back into the game. Players can toggle on and off between
 the standard 'Guess Mode' and the 'Answer Mode'. In the latter, correct letter
 selections grant lives back to the player, but one wrong move and the game ends instantly.
